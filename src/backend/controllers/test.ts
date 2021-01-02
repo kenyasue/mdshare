@@ -1,5 +1,8 @@
 import { Response, Request, NextFunction } from "express";
 
+import config from "../config";
+import { server } from "../server";
+
 /**
  * @swagger
  * /:
@@ -10,5 +13,5 @@ import { Response, Request, NextFunction } from "express";
  *         description: hello world
  */
 export const index = (req: Request, res: Response, next: NextFunction) => {
-  res.send("OK");
+  return server.nextApp.render(req, res, "/");
 };

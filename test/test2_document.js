@@ -1,7 +1,7 @@
 const supertest = require("supertest");
 const expect = require("chai").expect;
-const ServerHolder = require("../dist/backend/server");
-const server = new ServerHolder.Server({ port: 3001 });
+const Server = require("../dist/backend/server");
+const server = Server.server;
 const global = require("./global");
 
 let newDocumentId = 0;

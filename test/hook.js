@@ -1,6 +1,8 @@
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient();
 const global = require("./global");
+const Server = require("../dist/backend/server");
+const server = Server.server;
 
     before(async ()  => {
         // create dummy data
@@ -15,6 +17,9 @@ const global = require("./global");
             if (i == 0) global.documentIdToDelete = doc.id;
             
         }
+
+        await server.init();
+        server.listen({port:3001});
 
     });
 

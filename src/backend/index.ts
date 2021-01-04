@@ -1,11 +1,13 @@
-import express = require("express");
+import express from "express";
 
 import config from "./config";
-import { Server, ServerConfig } from "./server";
+import { server, ServerConfig } from "./server";
 
 const serverConfig: ServerConfig = {
   port: config.port,
 };
 
-const server = new Server(serverConfig);
-server.listen();
+(async () => {
+  await server.init();
+  server.listen(serverConfig);
+})();

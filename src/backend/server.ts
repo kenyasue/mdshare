@@ -3,9 +3,12 @@ import { Response, Request, NextFunction } from "express";
 import bodyParser from "body-parser";
 import Debug from "debug";
 import path from "path";
+import next from "next";
 
 import * as RouteTest from "./controllers/test";
 import * as RouteDocument from "./controllers/document";
+
+import config from "./config";
 
 // API Documentation
 import swaggerJsdoc from "swagger-jsdoc";
@@ -17,21 +20,33 @@ export interface ServerConfig {
   port: number;
 }
 
-export class Server {
+class Server {
   port: Number;
-  app: express.Application;
+  app: any;
+  nextApp: any;
+  handle: any;
 
-  constructor({ port }: ServerConfig) {
-    this.port = port;
+  constructor() {
+    // default port
+    this.port = 3000;
+
+    this.nextApp = next({
+      dev: config.isDev,
+      dir: path.resolve(__dirname, "../../src/frontend"),
+    });
+
+    this.handle = this.nextApp.getRequestHandler();
+
+    this.app = null;
+  }
+
+  async init(): Promise<void> {
+    await this.nextApp.prepare();
+
     this.app = express();
-
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(bodyParser.json());
 
-    this.urlMap();
-  }
-
-  urlMap(): void {
     // API Documnetation
 
     // __dirname = "dist/backend" not "src/backend"
@@ -64,6 +79,10 @@ export class Server {
     this.app.delete("/api/document/:id", RouteDocument.deleteOne);
     this.app.put("/api/document/:id", RouteDocument.put);
 
+    this.app.get("*", (req: Response, res: Response) => {
+      return this.handle(req, res);
+    });
+
     this.app.use(
       (err: Error, req: Request, res: Response, next: NextFunction) => {
         console.error(err.stack);
@@ -75,9 +94,14 @@ export class Server {
     );
   }
 
-  listen(): void {
+  listen(config: ServerConfig): void {
+    this.port = config.port;
+
     this.app.listen(this.port, () => {
       debug(`App is listening on port ${this.port} !`);
     });
   }
 }
+
+// singletons
+export const server = new Server();

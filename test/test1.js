@@ -1,7 +1,7 @@
 const supertest = require("supertest");
 const expect = require("chai").expect;
-const ServerHolder = require("../dist/backend/server");
-const server = new ServerHolder.Server({ port: 3001 });
+const Server = require("../dist/backend/server");
+const server = Server.server;
 
 
 describe("GET /", function() {
@@ -13,7 +13,6 @@ describe("GET /", function() {
             if (err) done(err)
 
             expect(res.status).to.eql(200);
-            expect(res.text).to.eql("OK");
 
         done();
       });

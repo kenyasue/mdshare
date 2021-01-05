@@ -1,104 +1,78 @@
-import { Form, Select, InputNumber, Switch, Slider, Button } from 'antd'
+import { Layout, Row, Col, Input, Button, Space } from "antd";
+const { Header, Footer, Sider, Content } = Layout;
+const { Search } = Input;
+import {
+  PlusOutlined,
+  FileAddOutlined,
+  FolderAddOutlined,
+} from "@ant-design/icons";
+import { Menu } from "antd";
 
-// Custom DatePicker that uses Day.js instead of Moment.js
-import DatePicker from '../components/DatePicker'
+const { SubMenu } = Menu;
 
-import { SmileFilled } from '@ant-design/icons'
-
-import Link from 'next/link'
-
-const FormItem = Form.Item
-const Option = Select.Option
-
-const content = {
-  marginTop: '100px',
-}
+import {
+  AppstoreOutlined,
+  MailOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
 
 export default function Home() {
   return (
-    <div style={content}>
-      <div className="text-center mb-5">
-        <Link href="#">
-          <a className="logo mr-0">
-            <SmileFilled size={48}/>
-          </a>
-        </Link>
+    <>
+      <Row className="header">
+        <Col span={24} className="padding-1">
+          header
+        </Col>
+      </Row>
+      <Row className="content">
+        <Col span={6} className="sider">
+          <Row className="sider-header">
+            <Col span={24} className="padding-left-1 ">
+              <Search
+                placeholder="input search text"
+                style={{ width: "calc(100% - 108px)" }}
+              />
+              <Button
+                type="primary"
+                icon={<FolderAddOutlined />}
+                style={{ width: 48, marginLeft: 6 }}
+                size="middle"
+              />
 
-        <p className="mb-0 mt-3 text-disabled">Welcome to the world !</p>
-      </div>
-      <div>
-        <Form layout="horizontal">
-          <FormItem
-            label="Input Number"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 8 }}
-          >
-            <InputNumber
-              size="large"
-              min={1}
-              max={10}
-              style={{ width: 100 }}
-              defaultValue={3}
-              name="inputNumber"
-            />
-          </FormItem>
-
-          <FormItem
-            label="Switch"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 8 }}
-          >
-            <Switch defaultChecked />
-          </FormItem>
-
-          <FormItem
-            label="Slider"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 8 }}
-          >
-            <Slider defaultValue={70} />
-            
-          </FormItem>
-
-          <FormItem
-            label="Select"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 8 }}
-          >
-            <Select
-              size="large"
-              defaultValue="lucy"
-              style={{ width: 192 }}
-            >
-              <Option value="jack">jack</Option>
-              <Option value="lucy">lucy</Option>
-              <Option value="disabled" disabled>
-                disabled
-              </Option>
-              <Option value="yiminghe">yiminghe</Option>
-            </Select>
-          </FormItem>
-
-          <FormItem
-            label="DatePicker"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 8 }}
-          >
-            <DatePicker name="startDate" />
-          </FormItem>
-          <FormItem
-            style={{ marginTop: 48 }}
-            wrapperCol={{ span: 8, offset: 8 }}
-          >
-            <Button size="large" type="primary" htmlType="submit">
-              OK
-            </Button>
-            <Button size="large" style={{ marginLeft: 8 }}>
-              Cancel
-            </Button>
-          </FormItem>
-        </Form>
-      </div>
-    </div>
-  )
+              <Button
+                type="primary"
+                icon={<FileAddOutlined />}
+                style={{ width: 48, marginLeft: 6 }}
+                size="middle"
+              />
+            </Col>
+          </Row>
+          <Row className="sider-menu">
+            <Col span={24}>
+              <Menu
+                defaultSelectedKeys={["1"]}
+                defaultOpenKeys={["sub1"]}
+                mode="inline"
+              >
+                <Menu.Item key="1">Option 1</Menu.Item>
+                <Menu.Item key="2">Option 2</Menu.Item>
+                <Menu.Item key="4">Option 4</Menu.Item>
+              </Menu>
+            </Col>
+          </Row>
+        </Col>
+        <Col span={18} className="padding-1 main">
+          <Input
+            placeholder="Please write title here"
+            className="title-input"
+          />
+        </Col>
+      </Row>
+      <Row className="footer">
+        <Col span={24} className="padding-1">
+          footer
+        </Col>
+      </Row>
+    </>
+  );
 }

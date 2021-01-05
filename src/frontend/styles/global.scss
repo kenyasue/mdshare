@@ -1,0 +1,83 @@
+@import "../../../node_modules/antd/dist/antd.dark.css";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+$defaultSpacing: 12px;
+$headerHeight: 48px;
+$borderColor: #303030;
+
+body {
+  font-size: 18px !important;
+  font-family: "Roboto", sans-serif;
+  background-color: #000 !important;
+  overflow: hidden;
+}
+
+.content {
+  height: calc(100vh - (#{$headerHeight} + 2px) * 2);
+
+  .sider {
+    background-color: #141414;
+
+    .sider-header {
+      padding-top: $defaultSpacing;
+      padding-bottom: $defaultSpacing;
+      padding-right: $defaultSpacing;
+      height: 54px;
+      border-right: 1px solid $borderColor;
+    }
+
+    .sider-menu .ant-menu {
+      height: calc(100vh - (#{$headerHeight} + 2px) * 2 - 54px);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+  }
+
+  .main {
+    .title-input {
+      border: none;
+      border-bottom: 1px solid $borderColor;
+      font-size: 24px;
+    }
+  }
+}
+
+.header {
+  height: $headerHeight;
+  background-color: #141414;
+  border-bottom: 1px solid $borderColor;
+}
+
+.footer {
+  height: $headerHeight;
+  background-color: #111;
+  border-top: 1px solid $borderColor;
+}
+
+.padding-1 {
+  padding: $defaultSpacing;
+}
+
+.padding-top-1 {
+  padding-top: $defaultSpacing;
+}
+
+.padding-bottom-1 {
+  padding-bottom: $defaultSpacing;
+}
+
+.padding-left-1 {
+  padding-left: $defaultSpacing;
+}
+
+.padding-right-1 {
+  padding-right: $defaultSpacing;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
